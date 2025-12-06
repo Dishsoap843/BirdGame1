@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://3dx4np7ptic3"]
+
+[ext_resource type="Script" uid="uid://bddq2e1c2ob0x" path="res://Scripts/BlueAcorn.gd" id="1_3q1h0"]
+[ext_resource type="Texture2D" uid="uid://dth2ye6anqaxw" path="res://Art/Acorn.png" id="2_vfcny"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ty8dj"]
+radius = 0.8971081
+height = 2.8716888
+
+[node name="Blue Acorn" type="Node2D"]
+script = ExtResource("1_3q1h0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(559, 267.00003)
+scale = Vector2(2, 2)
+texture = ExtResource("2_vfcny")
+
+[node name="Acorn" type="Area2D" parent="."]
+position = Vector2(699, 267.00003)
+scale = Vector2(10, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Acorn"]
+position = Vector2(-16.604927, -3.1436634)
+shape = SubResource("CapsuleShape2D_ty8dj")

@@ -1,0 +1,140 @@
+[gd_scene load_steps=10 format=3 uid="uid://btrxeg8t31v46"]
+
+[ext_resource type="Script" uid="uid://be686iepo35ho" path="res://Scripts/blue_nest.gd" id="1_jw32o"]
+[ext_resource type="Texture2D" uid="uid://1nfddox3jd8d" path="res://Art/Nest.png" id="1_r150o"]
+[ext_resource type="Script" uid="uid://bh5u54fesxkfm" path="res://Scripts/red_nest.gd" id="3_50glp"]
+[ext_resource type="Script" uid="uid://dvbwiatmtahlw" path="res://Scripts/Red Player.gd" id="3_rgh2o"]
+[ext_resource type="Script" uid="uid://bo2fjaulrq8bs" path="res://Scripts/Blue Player.gd" id="4_pbw6q"]
+[ext_resource type="Texture2D" uid="uid://dxg33iluyc7yj" path="res://Art/Black Duck (Still).png" id="4_rgh2o"]
+[ext_resource type="Texture2D" uid="uid://chru48ue70g2x" path="res://Art/Blue Egg.png" id="4_v1gob"]
+[ext_resource type="Texture2D" uid="uid://d0khntxpnhd3t" path="res://Art/Red Egg.png" id="6_jw32o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgh2o"]
+size = Vector2(41, 27)
+
+[node name="Scene" type="Node2D"]
+
+[node name="Functionality" type="Node" parent="."]
+
+[node name="Blue Nest" type="Node2D" parent="Functionality"]
+unique_name_in_owner = true
+scale = Vector2(3, 3)
+script = ExtResource("1_jw32o")
+
+[node name="Blue Nest Hitbox" type="Area2D" parent="Functionality/Blue Nest"]
+unique_name_in_owner = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Functionality/Blue Nest/Blue Nest Hitbox"]
+position = Vector2(240.33333, -133)
+polygon = PackedVector2Array(85, 172, 91, 163, 104, 163, 113, 168, 114, 180, 107, 186, 95, 186, 86, 181)
+
+[node name="Sprite2D" type="Sprite2D" parent="Functionality/Blue Nest"]
+position = Vector2(339, 41.666664)
+scale = Vector2(1, 0.94)
+texture = ExtResource("1_r150o")
+
+[node name="Red Nest" type="Node2D" parent="Functionality"]
+unique_name_in_owner = true
+scale = Vector2(3, 3)
+script = ExtResource("3_50glp")
+
+[node name="Red Nest Hitbox" type="Area2D" parent="Functionality/Red Nest"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Functionality/Red Nest/Red Nest Hitbox"]
+position = Vector2(-58, -1.6666641)
+polygon = PackedVector2Array(85, 172, 91, 163, 104, 163, 113, 168, 114, 180, 107, 186, 95, 186, 86, 181)
+
+[node name="Sprite2D" type="Sprite2D" parent="Functionality/Red Nest"]
+position = Vector2(42, 172.66664)
+scale = Vector2(1, 0.94)
+texture = ExtResource("1_r150o")
+
+[node name="Red Player" type="CharacterBody2D" parent="Functionality"]
+unique_name_in_owner = true
+position = Vector2(-379, 98)
+scale = Vector2(2, 2)
+script = ExtResource("3_rgh2o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Functionality/Red Player"]
+position = Vector2(254, 209)
+shape = SubResource("RectangleShape2D_rgh2o")
+
+[node name="Sprite2D" type="Sprite2D" parent="Functionality/Red Player"]
+position = Vector2(253, 211)
+texture = ExtResource("4_rgh2o")
+flip_h = true
+
+[node name="Egg" type="Sprite2D" parent="Functionality/Red Player"]
+position = Vector2(252.5, 209.5)
+texture = ExtResource("4_v1gob")
+
+[node name="Blue Player" type="CharacterBody2D" parent="Functionality"]
+unique_name_in_owner = true
+position = Vector2(513, -295)
+scale = Vector2(2, 2)
+script = ExtResource("4_pbw6q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Functionality/Blue Player"]
+position = Vector2(254, 209)
+shape = SubResource("RectangleShape2D_rgh2o")
+
+[node name="Sprite2D" type="Sprite2D" parent="Functionality/Blue Player"]
+position = Vector2(253, 211)
+texture = ExtResource("4_rgh2o")
+
+[node name="Egg" type="Sprite2D" parent="Functionality/Blue Player"]
+position = Vector2(256, 210)
+texture = ExtResource("6_jw32o")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Red Egg Count" type="Label" parent="UI"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 68.0
+offset_top = 589.0
+offset_right = 194.0
+offset_bottom = 612.0
+text = "Red Nest: 3 Eggs"
+
+[node name="Blue Egg Count" type="Label" parent="UI"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 955.0
+offset_top = 19.0
+offset_right = 1086.0
+offset_bottom = 42.0
+text = "Blue Nest: 3 Eggs"
+
+[node name="Blue Winner Text" type="Label" parent="UI"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 476.0
+offset_top = 267.0
+offset_right = 728.0
+offset_bottom = 336.0
+theme_override_font_sizes/font_size = 50
+text = "Blue Wins!"
+
+[node name="Red Winner Text" type="Label" parent="UI"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 485.0
+offset_top = 268.0
+offset_right = 721.0
+offset_bottom = 337.0
+theme_override_font_sizes/font_size = 50
+text = "Red Wins!"
+
+[connection signal="body_entered" from="Functionality/Blue Nest/Blue Nest Hitbox" to="Functionality/Red Player" method="stealEgg"]
+[connection signal="body_entered" from="Functionality/Blue Nest/Blue Nest Hitbox" to="Functionality/Blue Player" method="homeEntered"]
+[connection signal="body_exited" from="Functionality/Blue Nest/Blue Nest Hitbox" to="Functionality/Blue Player" method="homeExited"]
+[connection signal="body_entered" from="Functionality/Red Nest/Red Nest Hitbox" to="Functionality/Red Player" method="homeEntered"]
+[connection signal="body_entered" from="Functionality/Red Nest/Red Nest Hitbox" to="Functionality/Blue Player" method="stealEgg"]
+[connection signal="body_exited" from="Functionality/Red Nest/Red Nest Hitbox" to="Functionality/Red Player" method="homeExited"]
